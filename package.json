@@ -8,12 +8,12 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "find-file-up": "~1.0.2",
+    "find-file-up": "~2.0.1",
     "path-is-inside": "~1.0.2"
   },
   "devDependencies": {
-    "proxyquire": "~1.8.0",
-    "tape": "~4.6.3"
+    "proxyquire": "~2.1.0",
+    "tape": "~4.10.1"
   },
   "keywords": [
     "find",

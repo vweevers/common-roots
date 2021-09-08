@@ -24,7 +24,7 @@ module.exports = function (files, id, opts, done) {
           map[file] = root
         }
       } else {
-        return findUp(id, file, (err, rootFile) => {
+        return patchedFindUp(id, file, (err, rootFile) => {
           if (err) return done(err)
 
           if (!rootFile) {
@@ -47,4 +47,19 @@ module.exports = function (files, id, opts, done) {
 
     done(null, roots, map)
   }
+}
+
+function patchedFindUp(id, file, callback) {
+  file = path.resolve(file)
+
+  findUp(id, file, (err, result) => {
+    // TODO: fix this in `find-file-up`. Atm it ignores a ENOENT upon fs.stat(),
+    // should also ignore ENOTDIR. The ENOTDIR happens on a path like /file.js/foo
+    if (err && err.code === 'ENOTDIR') {
+      const parent = path.dirname(file)
+      if (parent !== file) return patchedFindUp(id, parent, callback)
+    }
+
+    callback(err, result)
+  })
 }

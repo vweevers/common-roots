@@ -1,6 +1,6 @@
 {
   "name": "common-roots",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "find root directories (containing .git or other)",
   "license": "MIT",
   "author": "Vincent Weevers",
